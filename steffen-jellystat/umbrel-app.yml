@@ -17,3 +17,4 @@ defaultUsername: ""
 defaultPassword: ""
 torOnly: false
 submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellystat.svg
