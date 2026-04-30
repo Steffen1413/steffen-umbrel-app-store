@@ -1,0 +1,19 @@
+manifestVersion: 1.1
+id: steffen-jellystat
+category: media
+name: Jellystat
+version: "1.1.7"
+tagline: Jellyfin statistics
+description: Jellystat for Jellyfin usage statistics.
+developer: CyferShepard
+website: https://github.com/CyferShepard/Jellystat
+repo: https://github.com/CyferShepard/Jellystat
+support: https://github.com/CyferShepard/Jellystat/issues
+dependencies: []
+port: 3000
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
