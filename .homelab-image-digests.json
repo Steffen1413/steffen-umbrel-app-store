@@ -1,4 +1,5 @@
 {
+  "eufy-security-ws": {},
   "homelab-dashy": {
     "lissy93/dashy:latest": "88729c0dbcb0d616bf5aa4547b3c36474007c0e97dd427cd61dce58dda7f3473"
   },
