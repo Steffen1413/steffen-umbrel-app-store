@@ -1,2 +1,2 @@
-id: "steffen" # Choose the ID for your app store. This should contain only alphabets ("a to z") and dashes ("-").
+id: "" # Codex: allow existing mixed app IDs like homelab-* and steffen-* to appear in this Community Store.
 name: "Steffen" # Choose the name of your app store. It will show up in the UI as "<name> App Store".
