@@ -1,6 +1,6 @@
 manifestVersion: 1.1
 id: eufy-security-ws
-category: automation
+category: Development
 name: Eufy Security WS
 version: "1.0.0"
 tagline: Eufy bridge for Home Assistant
