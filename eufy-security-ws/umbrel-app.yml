@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: eufy-security-ws
+category: automation
+name: Eufy Security WS
+version: "1.0.0"
+tagline: Eufy bridge for Home Assistant
+description: Local Eufy Security WebSocket bridge used by Home Assistant.
+developer: bropat
+website: https://github.com/bropat/eufy-security-ws
+repo: https://github.com/bropat/eufy-security-ws
+support: https://github.com/bropat/eufy-security-ws/issues
+dependencies: []
+port: 3032
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/selfhst/icons/svg/home-assistant.svg

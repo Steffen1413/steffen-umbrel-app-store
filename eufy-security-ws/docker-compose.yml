@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  server:
+    image: >-
+      bropat/eufy-security-ws@sha256:886da4bc8ff070b63bb88cea3b535e512240e54f14313fa8c2890c843abd9605
+    container_name: eufy-security-ws
+    restart: always
+    network_mode: host
+    env_file:
+      - ${APP_DATA_DIR}/eufy.env
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
