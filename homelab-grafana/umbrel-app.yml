@@ -1,6 +1,6 @@
 manifestVersion: 1.1
 id: homelab-grafana
-category: developer
+category: Development
 name: Homelab Grafana
 version: "1.0.0"
 tagline: Homelab monitoring stack

@@ -1,6 +1,6 @@
 manifestVersion: 1.1
 id: homelab-glances
-category: developer
+category: Development
 name: Glances
 version: "1.0.0"
 tagline: Live system metrics

@@ -1,6 +1,6 @@
 manifestVersion: 1.1
 id: homelab-homepage
-category: developer
+category: Development
 name: Homepage
 version: "1.0.0"
 tagline: Homelab dashboard

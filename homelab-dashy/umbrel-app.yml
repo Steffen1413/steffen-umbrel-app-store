@@ -1,6 +1,6 @@
 manifestVersion: 1.1
 id: homelab-dashy
-category: developer
+category: Development
 name: Dashy
 version: "1.0.0"
 tagline: Dashboard

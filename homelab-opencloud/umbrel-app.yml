@@ -1,6 +1,6 @@
 manifestVersion: 1.1
 id: homelab-opencloud
-category: developer
+category: Development
 name: OpenCloud
 version: "1.0.0"
 tagline: Cloud files

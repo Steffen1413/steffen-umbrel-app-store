@@ -1,6 +1,6 @@
 manifestVersion: 1.1
 id: homelab-uptime-kuma
-category: developer
+category: Development
 name: Uptime Kuma
 version: "2.3.0"
 tagline: Service monitoring
