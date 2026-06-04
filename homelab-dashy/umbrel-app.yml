@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-dashy
+category: developer
+name: Dashy
+version: "1.0.0"
+tagline: Dashboard
+description: Local Umbrel launcher for Dashy.
+developer: Steffen
+website: http://192.168.188.40:8088
+repo: http://192.168.188.40:8088
+support: http://192.168.188.40:8088
+dependencies: []
+port: 18088
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/dashy.png

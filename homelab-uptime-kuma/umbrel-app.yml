@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-uptime-kuma
+category: developer
+name: Uptime Kuma
+version: "2.3.0"
+tagline: Service monitoring
+description: Local Umbrel launcher for Uptime Kuma.
+developer: Louis Lam
+website: http://192.168.188.40:3002
+repo: https://github.com/louislam/uptime-kuma
+support: https://github.com/louislam/uptime-kuma/issues
+dependencies: []
+port: 13002
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptime-kuma.svg

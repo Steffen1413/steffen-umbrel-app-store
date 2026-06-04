@@ -10,7 +10,7 @@ website: https://github.com/CyferShepard/Jellystat
 repo: https://github.com/CyferShepard/Jellystat
 support: https://github.com/CyferShepard/Jellystat/issues
 dependencies: []
-port: 3000
+port: 13003
 gallery: []
 path: ""
 defaultUsername: ""

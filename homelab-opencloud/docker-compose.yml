@@ -1,0 +1,205 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: opencloud-redirect
+      APP_PORT: 8080
+      PROXY_AUTH_ADD: 'false'
+      PROXY_TRUST_UPSTREAM: 'true'
+    container_name: homelab-opencloud_app_proxy_1
+    depends_on:
+      - opencloud-redirect
+    networks:
+      opencloud-net: null
+  collabora:
+    cap_add:
+      - MKNOD
+    command:
+      - coolconfig generate-proof-key && /start-collabora-online.sh
+    entrypoint:
+      - /bin/bash
+      - '-c'
+    environment:
+      DONT_GEN_SSL_CERT: 'YES'
+      aliasgroup1: https://wopi.steffen-spielmann.de
+      extra_params: |
+        --o:ssl.enable=false \
+        --o:ssl.ssl_verification=true \
+        --o:ssl.termination=true \
+        --o:welcome.enable=false \
+        --o:net.frame_ancestors=opencloud.steffen-spielmann.de \
+        --o:net.lok_allow.host[14]=opencloud.steffen-spielmann.de \
+        --o:home_mode.enable=false
+        --o:storage.wopi.host[0]=opencloud.steffen-spielmann.de \
+      password: admin
+      username: admin
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - '-f'
+        - http://localhost:9980/hosting/discovery
+      timeout: 10s
+      interval: 15s
+      retries: 5
+    image: collabora/code:25.04.7.1.1
+    logging:
+      driver: local
+    networks:
+      opencloud-net: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 9980
+        published: '9980'
+        protocol: tcp
+      - mode: ingress
+        target: 9980
+        published: '9981'
+        protocol: tcp
+    restart: always
+    volumes:
+      - /usr/share/fonts/truetype:/usr/share/fonts/truetype/more:ro
+      - >-
+        /usr/share/fonts/truetype:/opt/cool/systemplate/usr/share/fonts/truetype/more:ro
+    container_name: homelab-opencloud_collabora_1
+  collaboration:
+    command:
+      - '-c'
+      - opencloud collaboration server
+    depends_on:
+      collabora:
+        condition: service_healthy
+        required: true
+      opencloud:
+        condition: service_started
+        required: true
+    entrypoint:
+      - /bin/sh
+    environment:
+      COLLABORATION_APP_ADDR: https://collabora.steffen-spielmann.de
+      COLLABORATION_APP_ICON: https://collabora.steffen-spielmann.de/favicon.ico
+      COLLABORATION_APP_INSECURE: 'false'
+      COLLABORATION_APP_NAME: CollaboraOnline
+      COLLABORATION_APP_PRODUCT: Collabora
+      COLLABORATION_CS3API_DATAGATEWAY_INSECURE: 'false'
+      COLLABORATION_GRPC_ADDR: 0.0.0.0:9301
+      COLLABORATION_HTTP_ADDR: 0.0.0.0:9300
+      COLLABORATION_LOG_LEVEL: info
+      COLLABORATION_WOPI_SRC: https://wopi.steffen-spielmann.de
+      MICRO_REGISTRY: nats-js-kv
+      MICRO_REGISTRY_ADDRESS: opencloud:9233
+      OC_URL: https://opencloud.steffen-spielmann.de
+    image: opencloudeu/opencloud-rolling:latest
+    logging:
+      driver: local
+    networks:
+      opencloud-net: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 9300
+        published: '9300'
+        protocol: tcp
+    restart: always
+    user: '1000:1000'
+    volumes:
+      - opencloud-config:/etc/opencloud
+    container_name: homelab-opencloud_collaboration_1
+  opencloud:
+    command:
+      - '-c'
+      - opencloud init || true; opencloud server
+    entrypoint:
+      - /bin/sh
+    environment:
+      COLLABORA_DOMAIN: collabora.steffen-spielmann.de
+      FRONTEND_APP_HANDLER_SECURE_VIEW_APP_ADDR: eu.opencloud.api.collaboration
+      FRONTEND_ARCHIVER_MAX_SIZE: '10000000000'
+      FRONTEND_CHECK_FOR_UPDATES: 'true'
+      GATEWAY_GRPC_ADDR: 0.0.0.0:9142
+      GRAPH_AVAILABLE_ROLES: >-
+        b1e2218d-eef8-4d4c-b82d-0f1a1b48f3b5,a8d5fe5e-96e3-418d-825b-534dbdf22b99,fb6c3e19-e378-47e5-b277-9732f9de6e21,58c63c02-1d89-4572-916a-870abc5a1b7d,2d00ce52-1fc2-4dbc-8b95-a73b73395f5a,1c996275-f1c9-4e71-abdf-a42f6495e960,312c0871-5ef7-4b3a-85b6-0e4074c64049,aa97fe03-7980-45ac-9e50-b325749fd7e6
+      IDM_ADMIN_PASSWORD: opencloudBenzin56!
+      IDM_CREATE_DEMO_USERS: 'false'
+      NATS_NATS_HOST: 0.0.0.0
+      NOTIFICATIONS_SMTP_AUTHENTICATION: ''
+      NOTIFICATIONS_SMTP_ENCRYPTION: none
+      NOTIFICATIONS_SMTP_HOST: ''
+      NOTIFICATIONS_SMTP_INSECURE: 'false'
+      NOTIFICATIONS_SMTP_PASSWORD: ''
+      NOTIFICATIONS_SMTP_PORT: ''
+      NOTIFICATIONS_SMTP_SENDER: OpenCloud Notifications <notifications@cloud.opencloud.test>
+      NOTIFICATIONS_SMTP_USERNAME: ''
+      OC_ADD_RUN_SERVICES: ''
+      OC_DEFAULT_LANGUAGE: ''
+      OC_INSECURE: 'false'
+      OC_LOG_COLOR: 'false'
+      OC_LOG_LEVEL: info
+      OC_LOG_PRETTY: 'false'
+      OC_PASSWORD_POLICY_BANNED_PASSWORDS_LIST: banned-password-list.txt
+      OC_PASSWORD_POLICY_DISABLED: 'false'
+      OC_PASSWORD_POLICY_MIN_CHARACTERS: '8'
+      OC_PASSWORD_POLICY_MIN_DIGITS: '1'
+      OC_PASSWORD_POLICY_MIN_LOWERCASE_CHARACTERS: '1'
+      OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS: '1'
+      OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS: '1'
+      OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD: 'true'
+      OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD: 'false'
+      OC_URL: https://opencloud.steffen-spielmann.de
+      PROXY_CSP_CONFIG_FILE_LOCATION: /etc/opencloud/csp.yaml
+      PROXY_ENABLE_BASIC_AUTH: 'false'
+      PROXY_HTTP_ADDR: 0.0.0.0:9200
+      PROXY_TLS: 'false'
+      TRAEFIK_PORT_HTTPS: ''
+      OC_CORS_ALLOW_ORIGINS: >-
+        https://opencloud.steffen-spielmann.de,http://192.168.188.40:19202,http://192.168.188.40:9201,http://umbrel.local:19202
+      OC_CORS_ALLOW_METHODS: >-
+        GET,POST,PUT,PATCH,DELETE,OPTIONS,PROPFIND,PROPPATCH,MKCOL,COPY,MOVE,LOCK,UNLOCK,REPORT,SEARCH
+    image: opencloudeu/opencloud-rolling:latest
+    logging:
+      driver: local
+    networks:
+      opencloud-net: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 9200
+        published: '9200'
+        protocol: tcp
+      - mode: ingress
+        target: 9200
+        published: '9201'
+        protocol: tcp
+    restart: always
+    user: '1000:1000'
+    volumes:
+      - ${APP_DATA_DIR}/config/opencloud/csp.yaml:/etc/opencloud/csp.yaml
+      - >-
+        ${APP_DATA_DIR}/config/opencloud/banned-password-list.txt:/etc/opencloud/banned-password-list.txt
+      - opencloud-config:/etc/opencloud
+      - opencloud-data:/var/lib/opencloud
+      - ${APP_DATA_DIR}/config/opencloud/apps:/var/lib/opencloud/web/assets/apps
+    container_name: homelab-opencloud_opencloud_1
+  opencloud-redirect:
+    image: nginx:alpine
+    container_name: homelab-opencloud_redirect_1
+    restart: always
+    command:
+      - /bin/sh
+      - '-c'
+      - >-
+        printf '%s\n' 'server { listen 8080; location / { return 302
+        https://opencloud.steffen-spielmann.de$$request_uri; } }' >
+        /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+    networks:
+      opencloud-net: null
+networks:
+  opencloud-net:
+    name: opencloud_opencloud-net
+volumes:
+  opencloud-config:
+    external: true
+    name: opencloud_opencloud-config
+  opencloud-data:
+    external: true
+    name: opencloud_opencloud-data

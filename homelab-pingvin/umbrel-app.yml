@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-pingvin
+category: developer
+name: Pingvin Share
+version: "1.0.0"
+tagline: File sharing
+description: Local Umbrel launcher for Pingvin Share.
+developer: Steffen
+website: https://download.steffen-spielmann.de
+repo: https://download.steffen-spielmann.de
+support: https://download.steffen-spielmann.de
+dependencies: []
+port: 13010
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pingvin-share.svg

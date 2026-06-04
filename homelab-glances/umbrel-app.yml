@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-glances
+category: developer
+name: Glances
+version: "1.0.0"
+tagline: Live system metrics
+description: Local Umbrel launcher for Glances.
+developer: Steffen
+website: http://192.168.188.40:61208
+repo: http://192.168.188.40:61208
+support: http://192.168.188.40:61208
+dependencies: []
+port: 16120
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/glances.svg

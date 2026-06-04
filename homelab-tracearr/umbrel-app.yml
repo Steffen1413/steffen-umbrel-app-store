@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-tracearr
+category: developer
+name: Tracearr
+version: "1.0.0"
+tagline: Media helper
+description: Local Umbrel launcher for Tracearr.
+developer: Steffen
+website: http://192.168.188.40:3000
+repo: http://192.168.188.40:3000
+support: http://192.168.188.40:3000
+dependencies: []
+port: 13000
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/tracearr.svg

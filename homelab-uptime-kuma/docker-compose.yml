@@ -1,0 +1,18 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: uptime-kuma
+      APP_PORT: 3001
+      PROXY_AUTH_ADD: 'false'
+      PROXY_TRUST_UPSTREAM: 'true'
+    container_name: homelab-uptime-kuma_app_proxy_1
+    depends_on:
+      - uptime-kuma
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: uptime-kuma
+    restart: always
+    ports:
+      - '3002:3001'
+    volumes:
+      - ${APP_DATA_DIR}/data:/app/data

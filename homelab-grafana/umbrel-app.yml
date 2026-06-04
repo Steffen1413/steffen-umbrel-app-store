@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-grafana
+category: developer
+name: Homelab Grafana
+version: "1.0.0"
+tagline: Homelab monitoring stack
+description: Grafana, Prometheus, Loki, Alloy and Homelab exporters for Steffens Homelab.
+developer: Steffen
+website: https://grafana.com
+repo: https://grafana.com
+support: https://grafana.com/docs
+dependencies: []
+port: 3031
+gallery: []
+path: ""
+defaultUsername: "admin"
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/grafana.svg

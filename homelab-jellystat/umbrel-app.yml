@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-jellystat
+category: developer
+name: Jellystat
+version: "1.0.0"
+tagline: Jellyfin statistics
+description: Local Umbrel launcher for Jellystat.
+developer: Steffen
+website: http://192.168.188.40:3001
+repo: http://192.168.188.40:3001
+support: http://192.168.188.40:3001
+dependencies: []
+port: 13001
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellystat.svg

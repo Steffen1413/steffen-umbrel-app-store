@@ -1,0 +1,99 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: homelab-grafana
+      APP_PORT: 3000
+      PROXY_AUTH_ADD: 'false'
+    container_name: homelab-grafana_app_proxy_1
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: homelab-grafana
+    restart: always
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${APP_PASSWORD}
+      GF_AUTH_ANONYMOUS_ENABLED: 'true'
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+      GF_ANALYTICS_REPORTING_ENABLED: 'false'
+      GF_ANALYTICS_CHECK_FOR_UPDATES: 'false'
+      GF_SERVER_ROOT_URL: http://192.168.188.40:3031/
+    volumes:
+      - ${APP_DATA_DIR}/grafana/data:/var/lib/grafana
+      - ${APP_DATA_DIR}/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ${APP_DATA_DIR}/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+      - loki
+  alert-relay:
+    image: python:3.12-alpine
+    container_name: homelab-alert-relay
+    restart: always
+    working_dir: /app
+    command: sh -c "python /app/alert_relay.py"
+    environment:
+      ALERT_BIND: 0.0.0.0
+      ALERT_PORT: '8080'
+      MAIL_CONFIG_PATH: /config/homelab-update-mail.env
+      MAIL_SENDER_PATH: /app/homelab-send-update-mail.py
+    volumes:
+      - ${APP_DATA_DIR}/alert-relay/alert_relay.py:/app/alert_relay.py:ro
+      - >-
+        /home/umbrel/.config/homelab-update-mail.env:/config/homelab-update-mail.env:ro
+      - >-
+        /home/umbrel/homelab-send-update-mail.py:/app/homelab-send-update-mail.py:ro
+  loki:
+    image: grafana/loki:3.7.0
+    container_name: homelab-loki
+    restart: always
+    command:
+      - '-config.file=/etc/loki/config.yaml'
+    volumes:
+      - ${APP_DATA_DIR}/loki/config.yaml:/etc/loki/config.yaml:ro
+      - ${APP_DATA_DIR}/loki/data:/loki
+  alloy:
+    image: grafana/alloy:latest
+    container_name: homelab-alloy
+    restart: always
+    command:
+      - run
+      - /etc/alloy/config.alloy
+      - '--storage.path=/var/lib/alloy/data'
+    depends_on:
+      - loki
+    volumes:
+      - ${APP_DATA_DIR}/alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - ${APP_DATA_DIR}/alloy/data:/var/lib/alloy/data
+      - /var/run/docker.sock:/var/run/docker.sock
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: homelab-prometheus
+    restart: always
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    volumes:
+      - >-
+        ${APP_DATA_DIR}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ${APP_DATA_DIR}/prometheus/data:/prometheus
+    depends_on:
+      - glances-exporter
+  glances-exporter:
+    image: python:3.12-alpine
+    container_name: homelab-glances-exporter
+    restart: always
+    working_dir: /app
+    command: >-
+      sh -c "pip install --no-cache-dir prometheus-client requests && python
+      /app/glances_exporter.py"
+    environment:
+      EXPORTER_PORT: '9108'
+      SCRAPE_INTERVAL: '15'
+      UMBREL_GLANCES_URL: http://192.168.188.40:61208
+      WINDOWS_GLANCES_URL: http://192.168.188.24:61208
+    volumes:
+      - >-
+        ${APP_DATA_DIR}/collector/glances_exporter.py:/app/glances_exporter.py:ro
+      - /sys:/host/sys:ro

@@ -1,31 +1,34 @@
-version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: steffen-jellystat_web_1
+      APP_HOST: jellystat
       APP_PORT: 3000
       PROXY_AUTH_ADD: 'false'
-    container_name: steffen-jellystat_app_proxy_1
-  db:
+    container_name: homelab-jellystat_app_proxy_1
+    depends_on:
+      - jellystat
+  postgres:
     image: postgres:15
-    restart: on-failure
+    container_name: jellystat-db
+    restart: always
     environment:
       POSTGRES_USER: jellystat
       POSTGRES_PASSWORD: jellystatpass
       POSTGRES_DB: jellystat
     volumes:
       - ${APP_DATA_DIR}/db:/var/lib/postgresql/data
-    container_name: steffen-jellystat_db_1
-  web:
+  jellystat:
     image: ghcr.io/cyfershepard/jellystat:1.1.7
-    restart: on-failure
+    container_name: jellystat
+    restart: always
     depends_on:
-      - db
+      - postgres
     environment:
       POSTGRES_USER: jellystat
       POSTGRES_PASSWORD: jellystatpass
       POSTGRES_DB: jellystat
-      POSTGRES_IP: db
+      POSTGRES_IP: postgres
       POSTGRES_PORT: 5432
       JWT_SECRET: supersecretkey
-    container_name: steffen-jellystat_web_1
+    ports:
+      - '3001:3000'

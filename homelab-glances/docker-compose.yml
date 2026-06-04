@@ -1,0 +1,8 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: 192.168.188.40
+      APP_PORT: 61208
+      PROXY_AUTH_ADD: 'false'
+      PROXY_TRUST_UPSTREAM: 'true'
+    container_name: homelab-glances_app_proxy_1

@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-opencloud
+category: developer
+name: OpenCloud
+version: "1.0.0"
+tagline: Cloud files
+description: Local Umbrel launcher for OpenCloud.
+developer: Steffen
+website: https://opencloud.steffen-spielmann.de
+repo: https://opencloud.steffen-spielmann.de
+support: https://opencloud.steffen-spielmann.de
+dependencies: []
+port: 19202
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://opencloud.steffen-spielmann.de/img/opencloud-icon.png
