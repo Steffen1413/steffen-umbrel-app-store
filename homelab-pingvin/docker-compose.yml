@@ -17,6 +17,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/opt/app/backend/data
       - ${APP_DATA_DIR}/data/images:/opt/app/frontend/public/img
+      - ${APP_DATA_DIR}/Caddyfile.trust-proxy:/opt/app/reverse-proxy/Caddyfile.trust-proxy:ro
     environment:
       - TRUST_PROXY=true
       - URL=https://download.steffen-spielmann.de

@@ -1,0 +1,16 @@
+:3000 {
+	@local_share_host {
+		header_regexp Host ^192\.168\.188\.40(:13010|:3010)?$
+	}
+	redir @local_share_host https://download.steffen-spielmann.de{uri} 302
+
+	# Reverse proxy for /api
+	reverse_proxy /api/* http://localhost:{$BACKEND_PORT:8080} {
+		trusted_proxies 0.0.0.0/0
+	}
+
+	# Reverse proxy for all other requests
+	reverse_proxy /* http://localhost:{$PORT:3333} {
+		trusted_proxies 0.0.0.0/0
+	}
+}
