@@ -1,7 +1,9 @@
 {
-  "eufy-security-ws": {},
+  "eufy-security-ws": {
+    "bropat/eufy-security-ws@sha256:886da4bc8ff070b63bb88cea3b535e512240e54f14313fa8c2890c843abd9605": "f307039c42a0d8f136cddb6fa7fed61c94a940ab68c260cea7278508b8f3384e"
+  },
   "homelab-dashy": {
-    "lissy93/dashy:latest": "88729c0dbcb0d616bf5aa4547b3c36474007c0e97dd427cd61dce58dda7f3473"
+    "lissy93/dashy:latest": "2d978a49068491db4ede05dcee98cc125e54091e450c61ff330795f90811e2fa"
   },
   "homelab-glances": {},
   "homelab-grafana": {
@@ -25,9 +27,13 @@
     "nginx:alpine": "358650d2d357dd45a455624d84b859b1c1d6a80c33e83fb085b36f8272e35102",
     "opencloudeu/opencloud-rolling:latest": "1a2fcbd3795266e895e85a3cf873554f88c91596e3489a158e636a9c943ca0e0"
   },
-  "homelab-pingvin": {},
+  "homelab-pingvin": {
+    "stonith404/pingvin-share:latest": "99a09548732d2e87c7bbab37acb1581a13369f8bdbb65cdc97257dbc6fe6b6be"
+  },
   "homelab-tracearr": {
     "ghcr.io/connorgallopo/tracearr:supervised": "6141815a2006ec30e54f6a966c9350b6c610374b29104d904adf8256d886a78d"
   },
-  "homelab-uptime-kuma": {}
+  "homelab-uptime-kuma": {
+    "louislam/uptime-kuma:2": "f248bd190b06ebe43db9953f9aaa878eec6478fd5e346701ff51ee0926045918"
+  }
 }
