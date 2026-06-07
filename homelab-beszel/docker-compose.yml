@@ -1,0 +1,49 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: beszel
+      APP_PORT: 8090
+      PROXY_AUTH_ADD: true
+      PROXY_TRUST_UPSTREAM: true
+    container_name: homelab-beszel_app_proxy_1
+    depends_on:
+      - beszel
+
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: homelab-beszel
+    restart: unless-stopped
+    environment:
+      APP_URL: http://192.168.188.40:13003
+      AUTO_LOGIN: umbrel@umbrel.local
+      USER_EMAIL: umbrel@umbrel.local
+      USER_PASSWORD: ${APP_PASSWORD}
+      CHECK_UPDATES: "false"
+    volumes:
+      - ${APP_DATA_DIR}/data:/beszel_data
+      - ${APP_DATA_DIR}/socket:/beszel_socket
+    healthcheck:
+      test: ["CMD", "/beszel", "health", "--url", "http://localhost:8090"]
+      interval: 120s
+      start_period: 15s
+      timeout: 5s
+      retries: 3
+
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    container_name: homelab-beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ${APP_DATA_DIR}/agent-data:/var/lib/beszel-agent
+      - ${APP_DATA_DIR}/socket:/beszel_socket
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      LISTEN: /beszel_socket/beszel.sock
+      KEY: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIItX4LYCm9sAj4rY5PbrP/adiAbNmQeMj2uxrhHP5eYo'
+    healthcheck:
+      test: ["CMD", "/agent", "health"]
+      interval: 120s
+      start_period: 15s
+      timeout: 5s
+      retries: 3

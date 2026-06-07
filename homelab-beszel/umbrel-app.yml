@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: homelab-beszel
+category: Development
+name: Beszel
+version: "0.12.14"
+tagline: Lightweight server monitoring
+description: Lightweight server monitoring for your Umbrel OS homelab with CPU, RAM, disk, Docker container stats, history, and alerts.
+developer: Henrygd
+website: https://beszel.dev
+repo: https://github.com/henrygd/beszel
+support: https://github.com/henrygd/beszel/issues
+dependencies: []
+port: 13003
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/selfhst/icons/svg/beszel.svg
