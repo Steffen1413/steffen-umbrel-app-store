@@ -3,7 +3,7 @@
     "bropat/eufy-security-ws@sha256:886da4bc8ff070b63bb88cea3b535e512240e54f14313fa8c2890c843abd9605": "f307039c42a0d8f136cddb6fa7fed61c94a940ab68c260cea7278508b8f3384e"
   },
   "homelab-dashy": {
-    "lissy93/dashy:latest": "7ec8641d90b7c905fc68047da9d5d0e689b5fe4edad2365375a4ca9d239b6bbb"
+    "lissy93/dashy:latest": "6de254b6da23f20a81532bca5a7596361f0bad177aa26609296d8d081cf5fd96"
   },
   "homelab-glances": {},
   "homelab-grafana": {
