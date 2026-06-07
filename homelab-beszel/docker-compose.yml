@@ -13,6 +13,8 @@ services:
     image: henrygd/beszel:latest
     container_name: homelab-beszel
     restart: unless-stopped
+    ports:
+      - 127.0.0.1:8090:8090
     environment:
       APP_URL: http://192.168.188.40:13003
       AUTO_LOGIN: umbrel@umbrel.local
@@ -40,6 +42,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       LISTEN: /beszel_socket/beszel.sock
+      HUB_URL: http://127.0.0.1:8090
+      TOKEN: ${APP_PASSWORD}
       KEY: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIItX4LYCm9sAj4rY5PbrP/adiAbNmQeMj2uxrhHP5eYo'
     healthcheck:
       test: ["CMD", "/agent", "health"]
