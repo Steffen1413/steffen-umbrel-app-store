@@ -2,6 +2,10 @@
   "eufy-security-ws": {
     "bropat/eufy-security-ws@sha256:886da4bc8ff070b63bb88cea3b535e512240e54f14313fa8c2890c843abd9605": "f307039c42a0d8f136cddb6fa7fed61c94a940ab68c260cea7278508b8f3384e"
   },
+  "homelab-beszel": {
+    "henrygd/beszel-agent:latest": "92d07dba2d0cbb4ace7a20873bd94f44a3586a5a7d44eb221238bacf9cabe6cf",
+    "henrygd/beszel:latest": "10e11cfe3c6957680593056e29286f2d7236d4c768f36c7a083b0314afce4088"
+  },
   "homelab-dashy": {
     "lissy93/dashy:latest": "6de254b6da23f20a81532bca5a7596361f0bad177aa26609296d8d081cf5fd96"
   },
@@ -21,6 +25,10 @@
   "homelab-jellystat": {
     "ghcr.io/cyfershepard/jellystat:1.1.7": "970bceb2327162fc2e292c5942f7f06e67e5cf47d3d33ce88deb26e0567cdb8d",
     "postgres:15": "098dc74740072f41ffc9c4335144e3156ef671c5dc282ab3520eb717c9aa5161"
+  },
+  "homelab-linkwarden": {
+    "getmeili/meilisearch:v1.12.8": "1044b7d7fce9993ef462e337b1fac896842cd333549f4a6fbf1b62864e556173",
+    "ghcr.io/linkwarden/linkwarden:v2.14.1@sha256:31cf4bd2a2e111991fa5c9de03174c8698869c83722105c6ce529e4c911e6861": "5944405b6e0688ee664f81a1133b78fcd82bd664c00e856f92870cc4dcac62de"
   },
   "homelab-opencloud": {
     "collabora/code:25.04.7.1.1": "da2c042f1e1753be31a2208164f6acfda75622fe604b495e3a364968137dd611",
