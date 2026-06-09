@@ -11,7 +11,7 @@
   },
   "homelab-glances": {},
   "homelab-grafana": {
-    "grafana/alloy:latest": "4b11d0014224fd6a1efd7f5948c7dc20c1242f2bcc2c8135718ae3112262f291",
+    "grafana/alloy:latest": "f8d0aeaff8726272db0d1eb407ae63753e4a221b0edbdb11549d417f781290e2",
     "grafana/grafana-oss:latest": "c92ea523dfeb48b1ff805285cbddbd4823cf979dfd5447830378384c465e3528",
     "grafana/loki:3.7.0": "1189a09415fb7b8972caef7f8e83ec214750994ce34f506e7dca473e7f6340cf",
     "prom/prometheus:latest": "725e30d21c14191e826d2c7ea0efd3ce3a45db16944acdc6cf59ecfd83b88cc2",
