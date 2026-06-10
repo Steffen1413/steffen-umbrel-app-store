@@ -18,7 +18,7 @@
     "python:3.12-alpine": "b8894dd8d492228d6259a2c7f28fcaaa634f7480aa34fd51a2c2aa2fbf91ec18"
   },
   "homelab-homepage": {
-    "ghcr.io/gethomepage/homepage:latest": "b6e845d2438839ea822509c6275567fc9f5f70d40e39c8431bffcadbe8cf856a",
+    "ghcr.io/gethomepage/homepage:latest": "c12216c42e6dca23bb10f5cd5327adb4cdb7eba4c055590b41b1c6b2d7b0f5e7",
     "ghcr.io/tecnativa/docker-socket-proxy:latest": "86dee2e92f1798ace1af6f60bb54e93a7c01f899818a955068daf97be9ee0d39",
     "nicolargo/glances:latest-full": "0c41b530d7d33bf8cc661118250c553fcfc2e04ef8ead979b1a3a2bb60888883"
   },
