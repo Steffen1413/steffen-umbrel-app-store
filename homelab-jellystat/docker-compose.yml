@@ -27,7 +27,7 @@ services:
       POSTGRES_USER: jellystat
       POSTGRES_PASSWORD: jellystatpass
       POSTGRES_DB: jellystat
-      POSTGRES_IP: postgres
+      POSTGRES_IP: jellystat-db
       POSTGRES_PORT: 5432
       JWT_SECRET: supersecretkey
     ports:
