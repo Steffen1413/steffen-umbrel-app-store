@@ -7,7 +7,7 @@
     "henrygd/beszel:latest": "10e11cfe3c6957680593056e29286f2d7236d4c768f36c7a083b0314afce4088"
   },
   "homelab-dashy": {
-    "lissy93/dashy:latest": "6de254b6da23f20a81532bca5a7596361f0bad177aa26609296d8d081cf5fd96"
+    "lissy93/dashy:latest": "ea07b6cfedbc5c3b84dc861ac199a8a561f617bee8a15b37a3fef17aa9e3778e"
   },
   "homelab-glances": {},
   "homelab-grafana": {
@@ -15,7 +15,7 @@
     "grafana/grafana-oss:latest": "c92ea523dfeb48b1ff805285cbddbd4823cf979dfd5447830378384c465e3528",
     "grafana/loki:3.7.0": "1189a09415fb7b8972caef7f8e83ec214750994ce34f506e7dca473e7f6340cf",
     "prom/prometheus:latest": "725e30d21c14191e826d2c7ea0efd3ce3a45db16944acdc6cf59ecfd83b88cc2",
-    "python:3.12-alpine": "b8894dd8d492228d6259a2c7f28fcaaa634f7480aa34fd51a2c2aa2fbf91ec18"
+    "python:3.12-alpine": "aa48786595e1bcf94a05e4aa096d37456667fc84511d029b1f4ea359a50e9833"
   },
   "homelab-homepage": {
     "ghcr.io/gethomepage/homepage:latest": "c12216c42e6dca23bb10f5cd5327adb4cdb7eba4c055590b41b1c6b2d7b0f5e7",
@@ -24,7 +24,7 @@
   },
   "homelab-jellystat": {
     "ghcr.io/cyfershepard/jellystat:1.1.7": "970bceb2327162fc2e292c5942f7f06e67e5cf47d3d33ce88deb26e0567cdb8d",
-    "postgres:15": "098dc74740072f41ffc9c4335144e3156ef671c5dc282ab3520eb717c9aa5161"
+    "postgres:15": "f79ac8080b5ee550948ea79c0d1527214ee135dbb0f52f328c380a06152c2bfd"
   },
   "homelab-linkwarden": {
     "getmeili/meilisearch:v1.12.8": "1044b7d7fce9993ef462e337b1fac896842cd333549f4a6fbf1b62864e556173",
