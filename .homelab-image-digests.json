@@ -7,7 +7,7 @@
     "henrygd/beszel:latest": "10e11cfe3c6957680593056e29286f2d7236d4c768f36c7a083b0314afce4088"
   },
   "homelab-dashy": {
-    "lissy93/dashy:latest": "2a4b5d2304e45c7214fd3b2b8c3f4c5e82e32c7eae94024ca4ebcf0bd2d847d1"
+    "lissy93/dashy:latest": "33f93f7420145f0584d158c737acda5fef3ff27e40566f8e99ea8117113efb66"
   },
   "homelab-glances": {
     "nicolargo/glances:4.5.3.2-full": "98bdcb2dc3aeb43c11894f6118350e61adcfd13fde4cdf1f23dfb307eb0d6801"
@@ -17,7 +17,7 @@
     "grafana/grafana-oss:latest": "c92ea523dfeb48b1ff805285cbddbd4823cf979dfd5447830378384c465e3528",
     "grafana/loki:3.7.0": "1189a09415fb7b8972caef7f8e83ec214750994ce34f506e7dca473e7f6340cf",
     "prom/prometheus:latest": "725e30d21c14191e826d2c7ea0efd3ce3a45db16944acdc6cf59ecfd83b88cc2",
-    "python:3.12-alpine": "fbc08b1e7e9df19c6847e48643ebf750a8f07ca1991653a7799b567a47885263"
+    "python:3.12-alpine": "353d7ccd28608882fa0edaea4483ea3c7ee7e2a7614d5d5a9ad5dcecdd06bf00"
   },
   "homelab-homepage": {
     "ghcr.io/gethomepage/homepage:latest": "c12216c42e6dca23bb10f5cd5327adb4cdb7eba4c055590b41b1c6b2d7b0f5e7",

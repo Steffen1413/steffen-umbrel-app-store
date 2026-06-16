@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: homelab-dashy
 category: Development
 name: Dashy
-version: "1.0.8"
+version: "1.0.9"
 tagline: Dashboard
 description: Local Umbrel launcher for Dashy.
 developer: Steffen
