@@ -7,7 +7,7 @@
     "henrygd/beszel:latest": "10e11cfe3c6957680593056e29286f2d7236d4c768f36c7a083b0314afce4088"
   },
   "homelab-dashy": {
-    "lissy93/dashy:latest": "33f93f7420145f0584d158c737acda5fef3ff27e40566f8e99ea8117113efb66"
+    "lissy93/dashy:latest": "8bb251e89e328008c3ef68e8e7b9c458ee2474d9eab5a44400f27c8a3ccbfca4"
   },
   "homelab-glances": {
     "nicolargo/glances:4.5.3.2-full": "98bdcb2dc3aeb43c11894f6118350e61adcfd13fde4cdf1f23dfb307eb0d6801"
