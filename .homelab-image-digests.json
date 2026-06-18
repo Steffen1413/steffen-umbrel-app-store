@@ -16,7 +16,7 @@
     "grafana/alloy:latest": "1c8a9df99fbbec5dbdcad9626fe668707cf237ad0406c485c520140f10a94042",
     "grafana/grafana-oss:latest": "c92ea523dfeb48b1ff805285cbddbd4823cf979dfd5447830378384c465e3528",
     "grafana/loki:3.7.0": "1189a09415fb7b8972caef7f8e83ec214750994ce34f506e7dca473e7f6340cf",
-    "prom/prometheus:latest": "725e30d21c14191e826d2c7ea0efd3ce3a45db16944acdc6cf59ecfd83b88cc2",
+    "prom/prometheus:latest": "6747472da759ee62da4dcce1efc9de54b13ee2dbdd2f09051a81089d7a868af2",
     "python:3.12-alpine": "353d7ccd28608882fa0edaea4483ea3c7ee7e2a7614d5d5a9ad5dcecdd06bf00"
   },
   "homelab-homepage": {
@@ -34,7 +34,7 @@
   },
   "homelab-opencloud": {
     "collabora/code:25.04.7.1.1": "da2c042f1e1753be31a2208164f6acfda75622fe604b495e3a364968137dd611",
-    "nginx:alpine": "358650d2d357dd45a455624d84b859b1c1d6a80c33e83fb085b36f8272e35102",
+    "nginx:alpine": "f5c3da3cf944f5cf05481b4f28cede67634f7c258cd269b7fce41f3c6caa9798",
     "opencloudeu/opencloud-rolling:latest": "1a2fcbd3795266e895e85a3cf873554f88c91596e3489a158e636a9c943ca0e0"
   },
   "homelab-pingvin": {
