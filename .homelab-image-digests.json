@@ -17,7 +17,7 @@
     "grafana/grafana-oss:latest": "c92ea523dfeb48b1ff805285cbddbd4823cf979dfd5447830378384c465e3528",
     "grafana/loki:3.7.0": "1189a09415fb7b8972caef7f8e83ec214750994ce34f506e7dca473e7f6340cf",
     "prom/prometheus:latest": "6747472da759ee62da4dcce1efc9de54b13ee2dbdd2f09051a81089d7a868af2",
-    "python:3.12-alpine": "353d7ccd28608882fa0edaea4483ea3c7ee7e2a7614d5d5a9ad5dcecdd06bf00"
+    "python:3.12-alpine": "7c2f7e82783b0dd9270cf5557439057b6add89f6ad127dfd3a244010d781582b"
   },
   "homelab-homepage": {
     "ghcr.io/gethomepage/homepage:latest": "c12216c42e6dca23bb10f5cd5327adb4cdb7eba4c055590b41b1c6b2d7b0f5e7",
