@@ -34,7 +34,7 @@
   },
   "homelab-opencloud": {
     "collabora/code:25.04.7.1.1": "da2c042f1e1753be31a2208164f6acfda75622fe604b495e3a364968137dd611",
-    "nginx:alpine": "f5c3da3cf944f5cf05481b4f28cede67634f7c258cd269b7fce41f3c6caa9798",
+    "nginx:alpine": "c3f95ada50e57380c58d8bb7f0a4552bc9ca3600a4b8dbaa105858236d6db4e0",
     "opencloudeu/opencloud-rolling:latest": "1a2fcbd3795266e895e85a3cf873554f88c91596e3489a158e636a9c943ca0e0"
   },
   "homelab-pingvin": {
