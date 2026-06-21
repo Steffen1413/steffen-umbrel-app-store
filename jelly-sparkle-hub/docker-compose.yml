@@ -7,6 +7,5 @@ services:
 
   web:
     container_name: jelly_sparkle_hub_web_1
-    build: ${APP_DATA_DIR}
-    image: local/jelly-sparkle-hub:1.0.0
+    image: ghcr.io/steffen1413/jelly-sparkle-hub:latest
     restart: unless-stopped
