@@ -1,0 +1,20 @@
+manifestVersion: 1.1
+id: jelly-sparkle-hub
+category: Media
+name: Film/Serien Empfehlungen
+version: "1.0.0"
+tagline: Personal film and series recommendation page
+description: Local static recommendation website for films and series.
+developer: Steffen
+website: http://192.168.188.40:4300
+repo: https://github.com/Steffen1413/jelly-sparkle-hub
+support: https://github.com/Steffen1413/jelly-sparkle-hub
+dependencies: []
+port: 4300
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/selfhst/icons/svg/jellyfin.svg

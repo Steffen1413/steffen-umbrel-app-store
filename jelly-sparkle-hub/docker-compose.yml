@@ -1,0 +1,11 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: web
+      APP_PORT: 80
+      PROXY_AUTH_ADD: "false"
+
+  web:
+    build: ${APP_DATA_DIR}
+    image: local/jelly-sparkle-hub:1.0.0
+    restart: unless-stopped
