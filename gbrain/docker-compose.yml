@@ -22,6 +22,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
       - ${APP_DATA_DIR}/brain:/brain
+      - /home/umbrel/umbrel/app-data/hermes-agent/data/hermes/skills:/hermes-skills:ro
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:3131/health >/dev/null || curl -fsS http://127.0.0.1:3131/mcp >/dev/null || exit 1"]
       interval: 30s
