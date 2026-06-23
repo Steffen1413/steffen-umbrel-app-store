@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: homelab-opencloud
 category: Development
 name: OpenCloud
-version: "1.0.2"
+version: "1.0.3"
 tagline: Cloud files
 description: Local Umbrel launcher for OpenCloud direct local access.
 developer: Steffen
