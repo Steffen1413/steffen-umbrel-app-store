@@ -1,0 +1,23 @@
+manifestVersion: 1.1
+id: homelab-hermes-desktop-bridge
+category: AI
+name: Hermes Desktop Bridge
+version: "1.0.0"
+tagline: Direct LAN bridge for Hermes Desktop
+description: Direct local reverse proxy to the Hermes Agent dashboard/backend for Hermes Desktop remote gateway mode. This bypasses the Umbrel auth proxy and is intended for trusted LAN/Tailscale use only.
+developer: Steffen
+website: https://hermes-agent.nousresearch.com
+repo: https://github.com/NousResearch/hermes-agent
+support: https://github.com/NousResearch/hermes-agent/issues
+dependencies: []
+port: 18791
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://hermes-agent.nousresearch.com/favicon.ico
+releaseNotes: >-
+  Initial bridge for connecting Hermes Desktop to the Hermes Agent Umbrel app
+  without the Umbrel authentication proxy.
