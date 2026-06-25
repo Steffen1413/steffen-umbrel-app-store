@@ -7,7 +7,7 @@
     "henrygd/beszel:latest": "10e11cfe3c6957680593056e29286f2d7236d4c768f36c7a083b0314afce4088"
   },
   "homelab-dashy": {
-    "lissy93/dashy:latest": "8bb251e89e328008c3ef68e8e7b9c458ee2474d9eab5a44400f27c8a3ccbfca4"
+    "lissy93/dashy:latest": "911c9d1cf20069ba3bd90ce6025989e0149f324af6e96c10886a0e520c39d596"
   },
   "homelab-glances": {},
   "homelab-grafana": {
@@ -17,6 +17,9 @@
     "prom/prometheus:latest": "6747472da759ee62da4dcce1efc9de54b13ee2dbdd2f09051a81089d7a868af2",
     "python:3.12-alpine": "7c2f7e82783b0dd9270cf5557439057b6add89f6ad127dfd3a244010d781582b"
   },
+  "homelab-hermes-desktop-bridge": {
+    "nginx:1.27-alpine": "7f5364b6ba388e082be557add34697dc78b9648b7b3c2c51717b4ce7bdfb2cb8"
+  },
   "homelab-homepage": {
     "ghcr.io/gethomepage/homepage:latest": "c12216c42e6dca23bb10f5cd5327adb4cdb7eba4c055590b41b1c6b2d7b0f5e7",
     "ghcr.io/tecnativa/docker-socket-proxy:latest": "86dee2e92f1798ace1af6f60bb54e93a7c01f899818a955068daf97be9ee0d39",
@@ -24,11 +27,11 @@
   },
   "homelab-jellystat": {
     "ghcr.io/cyfershepard/jellystat:1.1.7": "970bceb2327162fc2e292c5942f7f06e67e5cf47d3d33ce88deb26e0567cdb8d",
-    "postgres:15": "20acee5b556d1dda86ddc3cb558791b3b3e74ec9bfc9be6e980e6984c6e241c6"
+    "postgres:15": "e6a7d56c997828cc99b1e008c79e601a27f480ec2277145ec0eb496ddd59edd0"
   },
   "homelab-opencloud": {
     "collabora/code:25.04.7.1.1": "da2c042f1e1753be31a2208164f6acfda75622fe604b495e3a364968137dd611",
-    "nginx:alpine": "d44319a55c37f20e11cafae85b31d45770a1559748f98b229cbffdb40f03c823",
+    "nginx:alpine": "fa8b2faa18eb49d31605d4553c3cd9cfb5e35bc17d8dfc2e34658e6c31e6a00f",
     "opencloudeu/opencloud-rolling:latest": "1a2fcbd3795266e895e85a3cf873554f88c91596e3489a158e636a9c943ca0e0"
   },
   "homelab-pingvin": {
