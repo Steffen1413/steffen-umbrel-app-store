@@ -27,7 +27,7 @@
   },
   "homelab-jellystat": {
     "ghcr.io/cyfershepard/jellystat:1.1.7": "970bceb2327162fc2e292c5942f7f06e67e5cf47d3d33ce88deb26e0567cdb8d",
-    "postgres:15": "e6a7d56c997828cc99b1e008c79e601a27f480ec2277145ec0eb496ddd59edd0"
+    "postgres:15": "bd56d6bf2fcfd6a3ff2f3f37c606c47a5be42620e108e46b62013e182bce6975"
   },
   "homelab-opencloud": {
     "collabora/code:25.04.7.1.1": "da2c042f1e1753be31a2208164f6acfda75622fe604b495e3a364968137dd611",
