@@ -1,5 +1,5 @@
 manifestVersion: 1.1
-id: eufy-security-ws
+id: homelab-eufy-security-ws
 category: Development
 name: Eufy Security WS
 version: "1.0.0"
