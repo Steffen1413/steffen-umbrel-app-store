@@ -1,0 +1,14 @@
+services:
+  app_proxy:
+    container_name: jelly-sparkle-hub_app_proxy_1
+    environment:
+      APP_HOST: jelly_sparkle_hub_web_1
+      APP_PORT: 80
+      PROXY_AUTH_ADD: "false"
+
+  web:
+    container_name: jelly_sparkle_hub_web_1
+    image: ghcr.io/steffen1413/jelly-sparkle-hub@sha256:1cc3711e49bbae844ef2bf754da29341fa8f7fe836da2c2186493e04a93c4b68
+    restart: unless-stopped
+    env_file:
+      - ${APP_DATA_DIR}/.env.runtime
