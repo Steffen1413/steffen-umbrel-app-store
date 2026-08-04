@@ -18,6 +18,8 @@ services:
       - version
     volumes:
       - collabora-proof-key:/etc/coolwsd
+    healthcheck:
+      disable: true
     logging:
       driver: local
     restart: 'no'
@@ -125,6 +127,8 @@ services:
       COLLABORATION_GRPC_ADDR: 0.0.0.0:9301
       COLLABORATION_HTTP_ADDR: 0.0.0.0:9300
       COLLABORATION_LOG_LEVEL: info
+      COLLABORATION_EVENTS_ENDPOINT: opencloud:9233
+      COLLABORATION_STORE_NODES: opencloud:9233
       COLLABORATION_WOPI_SRC: https://wopi.steffen-spielmann.de
       MICRO_REGISTRY: nats-js-kv
       MICRO_REGISTRY_ADDRESS: opencloud:9233
