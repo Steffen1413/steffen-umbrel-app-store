@@ -10,34 +10,57 @@ services:
       - opencloud
     networks:
       opencloud-net: null
+  collabora-proof-key:
+    image: alpine/openssl:3.5.7
+    entrypoint:
+      - /bin/sh
+    command:
+      - '-ec'
+      - |
+        if [ ! -s /proof/proof_key ]; then
+          openssl genrsa -traditional -out /proof/proof_key.tmp 4096
+          chown 1001:1001 /proof/proof_key.tmp
+          chmod 400 /proof/proof_key.tmp
+          mv /proof/proof_key.tmp /proof/proof_key
+          echo "WOPI proof key generated"
+        else
+          echo "WOPI proof key already exists"
+        fi
+    volumes:
+      - collabora-proof-key:/proof
+    logging:
+      driver: local
+    restart: 'no'
+    container_name: homelab-opencloud_collabora-proof-key_1
   collabora:
     cap_add:
-      - MKNOD
-    command:
-      - coolconfig generate-proof-key && /start-collabora-online.sh
-    entrypoint:
-      - /bin/bash
-      - '-c'
+      - SYS_ADMIN
+    security_opt:
+      - seccomp=unconfined
+      - apparmor:unconfined
+    depends_on:
+      collabora-proof-key:
+        condition: service_completed_successfully
+        required: true
     environment:
-      DONT_GEN_SSL_CERT: 'YES'
       aliasgroup1: https://wopi.steffen-spielmann.de
-      extra_params: |
-        --o:ssl.enable=false \
-        --o:ssl.ssl_verification=true \
-        --o:ssl.termination=true \
-        --o:welcome.enable=false \
-        --o:net.frame_ancestors=opencloud.steffen-spielmann.de \
-        --o:net.lok_allow.host[14]=opencloud.steffen-spielmann.de \
+      extra_params: >
+        --o:ssl.enable=false
+        --o:ssl.ssl_verification=true
+        --o:ssl.termination=true
+        --o:welcome.enable=false
+        --o:net.frame_ancestors=opencloud.steffen-spielmann.de
+        --o:net.lok_allow.host[14]=opencloud.steffen-spielmann.de
         --o:home_mode.enable=false
-        --o:storage.wopi.host[0]=opencloud.steffen-spielmann.de \
+        --o:storage.wopi.host[0]=opencloud.steffen-spielmann.de
       password: admin
       username: admin
     healthcheck:
       test:
         - CMD
-        - curl
-        - '-f'
-        - http://localhost:9980/hosting/discovery
+        - /usr/bin/coolwsd
+        - '--probe'
+        - '--use-env-vars'
       timeout: 10s
       interval: 15s
       retries: 5
@@ -61,6 +84,12 @@ services:
       - /usr/share/fonts/truetype:/usr/share/fonts/truetype/more:ro
       - >-
         /usr/share/fonts/truetype:/opt/cool/systemplate/usr/share/fonts/truetype/more:ro
+      - type: volume
+        source: collabora-proof-key
+        target: /etc/coolwsd/proof_key
+        read_only: true
+        volume:
+          subpath: proof_key
     container_name: homelab-opencloud_collabora_1
   collaboration:
     command:
@@ -193,6 +222,7 @@ networks:
   opencloud-net:
     name: opencloud_opencloud-net
 volumes:
+  collabora-proof-key: null
   opencloud-config:
     external: true
     name: opencloud_opencloud-config
