@@ -43,7 +43,7 @@ services:
       - >-
         /home/umbrel/homelab-send-update-mail.py:/app/homelab-send-update-mail.py:ro
   loki:
-    image: grafana/loki:3.7.0
+    image: grafana/loki:3.7.4
     container_name: homelab-loki
     restart: always
     command:

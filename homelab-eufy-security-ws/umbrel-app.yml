@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: homelab-eufy-security-ws
 category: Development
 name: Eufy Security WS
-version: "1.0.0"
+version: "3.1.0"
 tagline: Eufy bridge for Home Assistant
 description: Local Eufy Security WebSocket bridge used by Home Assistant.
 developer: bropat

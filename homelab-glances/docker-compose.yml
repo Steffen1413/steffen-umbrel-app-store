@@ -1,8 +1,17 @@
 services:
   app_proxy:
     environment:
-      APP_HOST: 192.168.188.40
+      APP_HOST: homelab-glances_web_1
       APP_PORT: 61208
       PROXY_AUTH_ADD: 'false'
-      PROXY_TRUST_UPSTREAM: 'true'
     container_name: homelab-glances_app_proxy_1
+  web:
+    image: nicolargo/glances:4.5.6-full
+    environment:
+      - TZ=Europe/Berlin
+      - GLANCES_OPT=-w
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    container_name: homelab-glances_web_1

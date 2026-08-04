@@ -41,7 +41,7 @@ services:
       timeout: 10s
       interval: 15s
       retries: 5
-    image: collabora/code:25.04.7.1.1
+    image: collabora/code:26.04.2.4.1
     logging:
       driver: local
     networks:

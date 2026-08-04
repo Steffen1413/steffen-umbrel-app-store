@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: homelab-hermes-desktop-bridge
 category: AI
 name: Hermes Desktop Bridge
-version: "1.0.0"
+version: "1.0.1"
 tagline: Direct LAN bridge for Hermes Desktop
 description: Direct local reverse proxy to the Hermes Agent dashboard/backend for Hermes Desktop remote gateway mode. This bypasses the Umbrel auth proxy and is intended for trusted LAN/Tailscale use only.
 developer: Steffen

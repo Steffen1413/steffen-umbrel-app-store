@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: homelab-uptime-kuma
 category: Development
 name: Uptime Kuma
-version: "2.3.0"
+version: "2.5.0"
 tagline: Service monitoring
 description: Local Umbrel launcher for Uptime Kuma.
 developer: Louis Lam

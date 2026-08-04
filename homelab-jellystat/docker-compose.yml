@@ -18,7 +18,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/db:/var/lib/postgresql/data
   jellystat:
-    image: ghcr.io/cyfershepard/jellystat:1.1.7
+    image: ghcr.io/cyfershepard/jellystat:1.1.11
     container_name: jellystat
     restart: always
     depends_on:
