@@ -10,8 +10,24 @@ services:
       - opencloud
     networks:
       opencloud-net: null
+  collabora-config-init:
+    image: collabora/code:26.04.2.4.1
+    entrypoint:
+      - /usr/bin/openssl
+    command:
+      - version
+    volumes:
+      - collabora-proof-key:/etc/coolwsd
+    logging:
+      driver: local
+    restart: 'no'
+    container_name: homelab-opencloud_collabora-config-init_1
   collabora-proof-key:
     image: alpine/openssl:3.5.7
+    depends_on:
+      collabora-config-init:
+        condition: service_completed_successfully
+        required: true
     entrypoint:
       - /bin/sh
     command:
@@ -84,12 +100,7 @@ services:
       - /usr/share/fonts/truetype:/usr/share/fonts/truetype/more:ro
       - >-
         /usr/share/fonts/truetype:/opt/cool/systemplate/usr/share/fonts/truetype/more:ro
-      - type: volume
-        source: collabora-proof-key
-        target: /etc/coolwsd/proof_key
-        read_only: true
-        volume:
-          subpath: proof_key
+      - collabora-proof-key:/etc/coolwsd:ro
     container_name: homelab-opencloud_collabora_1
   collaboration:
     command:
