@@ -10,7 +10,6 @@ services:
   web:
     container_name: gbrain_web_1
     build: ${APP_DATA_DIR}
-    image: local/gbrain:0.42.52
     restart: unless-stopped
     stop_grace_period: 30s
     env_file:

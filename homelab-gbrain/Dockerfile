@@ -6,6 +6,7 @@ RUN apt-get update \
 
 RUN git clone https://github.com/garrytan/gbrain.git /opt/gbrain \
   && cd /opt/gbrain \
+  && git checkout e5dee4fb78481f0fb7c78016fc7e450bef252caa \
   && bun install \
   && bun link
 
