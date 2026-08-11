@@ -8,7 +8,7 @@ services:
 
   web:
     container_name: jelly_sparkle_hub_web_1
-    image: ghcr.io/steffen1413/jelly-sparkle-hub@sha256:e892607f8f5a158d0cb2be79fab9fe7da9c0fa5bc0b2bd9dc06d8e4c204de200
+    image: ghcr.io/steffen1413/jelly-sparkle-hub@sha256:6d21f3de3ef3802065468c1805119d82879c548ade88113a83dbf63aa524d16b
     restart: unless-stopped
     env_file:
       - ${APP_DATA_DIR}/.env.runtime
