@@ -1,27 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export HOME=${HOME:-/data}
-export GBRAIN_HOME=${GBRAIN_HOME:-/data}
-GBRAIN_CONFIG=$GBRAIN_HOME/.gbrain/config.json
+export HOME="${HOME:-/data}"
+export GBRAIN_HOME="${GBRAIN_HOME:-/data}"
+GBRAIN_CONFIG="$GBRAIN_HOME/.gbrain/config.json"
+GBRAIN_LOCK_DIR="$GBRAIN_HOME/.gbrain/brain.pglite/.gbrain-lock"
 
-mkdir -p $HOME $GBRAIN_HOME /brain
-GBRAIN_LOCK_DIR=$GBRAIN_HOME/.gbrain/brain.pglite/.gbrain-lock
-
+mkdir -p "$HOME" "$GBRAIN_HOME" /brain
 
 if ! command -v gbrain >/dev/null 2>&1; then
-  echo gbrain command not found >&2
+  echo "gbrain command not found" >&2
   exit 127
 fi
 
-if [ -d $GBRAIN_LOCK_DIR ]; then
-  echo [gbrain] removing stale PGLite lock
-  rm -rf $GBRAIN_LOCK_DIR
+if [[ -d "$GBRAIN_LOCK_DIR" ]]; then
+  case "$GBRAIN_LOCK_DIR" in
+    "$GBRAIN_HOME/.gbrain/brain.pglite/.gbrain-lock")
+      echo "[gbrain] removing stale PGLite lock"
+      rm -rf -- "$GBRAIN_LOCK_DIR"
+      ;;
+    *)
+      echo "[gbrain] refusing unexpected lock path: $GBRAIN_LOCK_DIR" >&2
+      exit 1
+      ;;
+  esac
 fi
 
-if [ ! -f $GBRAIN_CONFIG ]; then
-  echo [gbrain] first init in $GBRAIN_HOME
-  if [ -n ${OPENAI_API_KEY:-} ] || [ -n ${ZEROENTROPY_API_KEY:-} ] || [ -n ${VOYAGE_API_KEY:-} ]; then
+if [[ ! -f "$GBRAIN_CONFIG" ]]; then
+  echo "[gbrain] first init in $GBRAIN_HOME"
+  if [[ -n "${OPENAI_API_KEY:-}" || -n "${ZEROENTROPY_API_KEY:-}" || -n "${VOYAGE_API_KEY:-}" ]]; then
     gbrain init --pglite
   else
     gbrain init --pglite --no-embedding
@@ -30,4 +37,8 @@ if [ ! -f $GBRAIN_CONFIG ]; then
   gbrain config set mcp.publish_skills true || true
 fi
 
-exec $@
+# Keep the persistent database compatible with the pinned image after both
+# Umbrel updates and ordinary container restarts. This command is idempotent.
+gbrain apply-migrations --yes
+
+exec "$@"
