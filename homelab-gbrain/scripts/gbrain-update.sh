@@ -21,7 +21,9 @@ OLD_IMAGE="$(sudo docker inspect -f '{{.Image}}' "$CONTAINER")"
 sudo docker image tag "$OLD_IMAGE" "codex-rollback/homelab-gbrain-web:$STAMP-before-update"
 
 # Build before stopping production so dependency and source failures cause no outage.
-sudo --preserve-env=APP_DATA_DIR docker compose build web
+VERSION="$(awk -F'"'"'"'"'"' '"'"'/^version:/{print $2; exit}'"'"' "$BASE/umbrel-app.yml")"
+[[ "$VERSION" =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]
+sudo docker build --pull=false   -t homelab-gbrain-web:latest   -t "homelab-gbrain-web:$VERSION"   -t homelab-gbrain-web   "$BASE"
 sudo docker run --rm --entrypoint gbrain homelab-gbrain-web:latest --version
 
 umbreld client apps.stop.mutate --appId "$APP_ID" >/dev/null
