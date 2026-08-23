@@ -1,50 +1,56 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -Eeuo pipefail
 
-BASE=/home/umbrel/umbrel/app-data/gbrain
-STAMP=$(date +%Y%m%d-%H%M%S)
-cd $BASE
+BASE="/home/umbrel/umbrel/app-data/homelab-gbrain"
+APP_ID="homelab-gbrain"
+CONTAINER="gbrain_web_1"
+STAMP="$(date +%Y%m%d-%H%M%S)"
+BACKUP_ROOT="/home/umbrel/umbrel/app-data-update-backups"
+BACKUP="$BACKUP_ROOT/gbrain-$STAMP"
+export APP_DATA_DIR="$BASE"
 
-mkdir -p backups
-sudo tar -czf backups/gbrain-before-update-$STAMP.tgz data brain secrets docker-compose.yml Dockerfile scripts
+if [[ ! -f "$BASE/docker-compose.yml" || ! -d "$BASE/data" || ! -d "$BASE/brain" ]]; then
+  echo "refusing unexpected app layout at $BASE" >&2
+  exit 1
+fi
 
-sudo docker compose down >/dev/null 2>&1 || true
-sudo rm -rf data/.gbrain/brain.pglite/.gbrain-lock
+cd "$BASE"
+mkdir -p "$BACKUP"
 
-sudo docker compose build --pull
+OLD_IMAGE="$(sudo docker inspect -f '{{.Image}}' "$CONTAINER")"
+sudo docker image tag "$OLD_IMAGE" "codex-rollback/homelab-gbrain-web:$STAMP-before-update"
 
-sudo rm -rf data/.gbrain/brain.pglite/.gbrain-lock
-sudo docker run --rm --entrypoint sh \
+# Build before stopping production so dependency and source failures cause no outage.
+sudo --preserve-env=APP_DATA_DIR docker compose build web
+sudo docker run --rm --entrypoint gbrain homelab-gbrain-web:latest --version
+
+umbreld client apps.stop.mutate --appId "$APP_ID" >/dev/null
+trap 'umbreld client apps.start.mutate --appId "$APP_ID" >/dev/null 2>&1 || true' EXIT
+
+sudo tar -C "$BASE" -czf "$BACKUP/app-data.tgz" \
+  Dockerfile docker-compose.yml umbrel-app.yml scripts secrets data brain
+sudo sha256sum "$BACKUP/app-data.tgz" | sudo tee "$BACKUP/SHA256SUMS" >/dev/null
+
+sudo docker run --rm \
+  --env-file "$BASE/secrets/gbrain.env" \
   -e HOME=/data \
   -e GBRAIN_HOME=/data \
-  -v $BASE/data:/data \
-  local/gbrain:0.42.52 \
-  -lc 'cd /opt/gbrain && gbrain apply-migrations --yes && gbrain post-upgrade || true'
+  -e GBRAIN_NO_ONBOARD_NUDGE=1 \
+  -v "$BASE/data:/data" \
+  -v "$BASE/brain:/brain" \
+  --entrypoint bash \
+  homelab-gbrain-web:latest \
+  -lc 'gbrain apply-migrations --yes && gbrain doctor --json && gbrain stats'
 
-sudo rm -rf data/.gbrain/brain.pglite/.gbrain-lock
-sudo docker run --rm --entrypoint sh \
-  -e HOME=/data \
-  -e GBRAIN_HOME=/data \
-  -v $BASE/data:/data \
-  local/gbrain:0.42.52 \
-  -lc 'cd /opt/gbrain && gbrain doctor --json' > /tmp/gbrain-doctor-$STAMP.json || {
-    echo doctor_failed_backup=$BASE/backups/gbrain-before-update-$STAMP.tgz >&2
-    cat /tmp/gbrain-doctor-$STAMP.json >&2 || true
-    exit 1
-  }
-
-sudo rm -rf data/.gbrain/brain.pglite/.gbrain-lock
-sudo docker compose up -d
-
-for _ in $(seq 1 30); do
+umbreld client apps.start.mutate --appId "$APP_ID" >/dev/null
+for _ in $(seq 1 60); do
   if curl -fsS http://127.0.0.1:3131/health >/dev/null 2>&1; then
-    echo updated_ok_backup=$BASE/backups/gbrain-before-update-$STAMP.tgz
+    trap - EXIT
+    echo "updated_ok backup=$BACKUP rollback_image=codex-rollback/homelab-gbrain-web:$STAMP-before-update"
     exit 0
   fi
   sleep 2
 done
 
-echo healthcheck_failed_backup=$BASE/backups/gbrain-before-update-$STAMP.tgz >&2
-sudo docker compose ps >&2 || true
-sudo docker compose logs --tail=120 gbrain >&2 || true
+echo "healthcheck failed; backup=$BACKUP rollback_image=codex-rollback/homelab-gbrain-web:$STAMP-before-update" >&2
 exit 1
