@@ -2,9 +2,10 @@ manifestVersion: 1.1
 id: homelab-jellystat
 category: Development
 name: Jellystat
-version: "1.1.11"
+version: "1.1.12"
 tagline: Jellyfin statistics
 description: Local Umbrel launcher for Jellystat.
+releaseNotes: Jellystat 1.1.12 security update.
 developer: Steffen
 website: http://192.168.188.40:3001
 repo: http://192.168.188.40:3001

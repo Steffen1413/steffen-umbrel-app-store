@@ -4,7 +4,7 @@ name: ownCloud
 tagline: A smart cloud for your files
 icon: https://raw.githubusercontent.com/dennysubke/dennys-umbrel-app-gallery/main/denny-owncloud/logo.png
 category: files & productivity
-version: 10.16.3
+version: 10.16.4
 port: 8666
 description: >-
   ☁️ ownCloud is a comprehensive software application designed to provide users with a personal cloud storage solution that combines file management, collaboration, and organizational tools in one platform. It allows users to upload, store, and organize their files in a secure, centralized environment, making it easy to keep track of documents, photos, videos, and other types of data. With OwnCloud, files can be synchronized seamlessly across multiple devices such as computers, smartphones, and tablets, ensuring that users always have access to the most up-to-date versions no matter where they are or what device they are using.
@@ -32,7 +32,7 @@ gallery:
   - https://raw.githubusercontent.com/dennysubke/dennys-umbrel-app-gallery/main/denny-owncloud/3.jpg
   - https://raw.githubusercontent.com/dennysubke/dennys-umbrel-app-gallery/main/denny-owncloud/4.jpg
 releaseNotes: >-
-  Stable ownCloud 10.16.3 with the existing oc_ database prefix and persistent /mnt/data/files data path preserved for safe Umbrel updates.
+  Security update to ownCloud 10.16.4 with the existing database prefix and persistent data path preserved for safe Umbrel updates.
 dependencies: []
 path: ""
 defaultUsername: "admin"
