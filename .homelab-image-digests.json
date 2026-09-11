@@ -25,6 +25,9 @@
     "ghcr.io/tecnativa/docker-socket-proxy:latest": "86dee2e92f1798ace1af6f60bb54e93a7c01f899818a955068daf97be9ee0d39",
     "nicolargo/glances:latest-full": "ac7c175e7e8299c246bf493b304b16ca97bc9628c879f26c45b6119279efa092"
   },
+  "homelab-jellydash": {
+    "ghcr.io/themartz90/jellydash:latest": "e540a8502982eda9b8a0ddbc092727126aaf13cd696361c665b3e9ef8b6705e7"
+  },
   "homelab-jellystat": {
     "ghcr.io/cyfershepard/jellystat:1.1.7": "970bceb2327162fc2e292c5942f7f06e67e5cf47d3d33ce88deb26e0567cdb8d",
     "postgres:15": "bd56d6bf2fcfd6a3ff2f3f37c606c47a5be42620e108e46b62013e182bce6975"
