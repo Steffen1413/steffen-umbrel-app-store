@@ -1,0 +1,21 @@
+manifestVersion: 1.1
+id: homelab-jellydash
+category: Media
+name: Jellydash
+version: "1.9.0"
+tagline: Jellyfin monitoring dashboard
+description: A lightweight Jellyfin dashboard with live sessions, complete play history, statistics, libraries and optional notifications.
+releaseNotes: Jellydash 1.9.0 with statistics drilldowns, improved playback reliability and hardened proxy handling.
+developer: Martz
+website: https://jellydash.madebymartz.com/
+repo: https://github.com/themartz90/jellydash
+support: https://github.com/themartz90/jellydash/issues
+dependencies: []
+port: 13003
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+torOnly: false
+submitter: Steffen
+icon: https://cdn.jsdelivr.net/gh/themartz90/jellydash@963cea76b63a3c293f43f817d5632d3546d512fb/public/assets/img/icon-512.png
