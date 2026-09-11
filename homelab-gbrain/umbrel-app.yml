@@ -2,10 +2,10 @@ manifestVersion: 1.1
 id: homelab-gbrain
 category: Development
 name: GBrain
-version: "0.50.0.0"
+version: "0.46.28.0"
 tagline: Local AI memory and retrieval service
 description: Local GBrain service for Hermes memory and retrieval, backed by persistent Umbrel app data.
-releaseNotes: GBrain 0.50.0.0 with owner-approved OAuth connections, durable background-job authorization, migration 149, and document and outbound-request hardening.
+releaseNotes: GBrain 0.46.28.0 with live PGLite sync, memory verbs, Hermes transcript ingestion, scoped multi-agent access, retrieval hardening, and data-safety fixes.
 developer: Garry Tan
 website: https://github.com/garrytan/gbrain
 repo: https://github.com/garrytan/gbrain

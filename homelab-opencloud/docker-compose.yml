@@ -175,6 +175,10 @@ services:
       NOTIFICATIONS_SMTP_SENDER: OpenCloud Notifications <notifications@cloud.opencloud.test>
       NOTIFICATIONS_SMTP_USERNAME: ''
       OC_ADD_RUN_SERVICES: ''
+      # OpenCloud 7.5: the separate collaboration container must reach the
+      # storage-users datagateway over the internal Docker network.
+      STORAGE_USERS_HTTP_ADDR: 0.0.0.0:9158
+      STORAGE_USERS_DATA_SERVER_URL: http://opencloud:9158/data
       OC_DEFAULT_LANGUAGE: ''
       OC_INSECURE: 'false'
       OC_LOG_COLOR: 'false'
