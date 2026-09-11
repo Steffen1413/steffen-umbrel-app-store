@@ -11,7 +11,7 @@ website: https://jellydash.madebymartz.com/
 repo: https://github.com/themartz90/jellydash
 support: https://github.com/themartz90/jellydash/issues
 dependencies: []
-port: 13003
+port: 13004
 gallery: []
 path: ""
 defaultUsername: ""
