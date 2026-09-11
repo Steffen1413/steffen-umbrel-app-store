@@ -2,9 +2,10 @@ manifestVersion: 1.1
 id: homelab-dashy
 category: Development
 name: Dashy
-version: "4.5.5"
+version: "4.6.0"
 tagline: Dashboard
 description: Local Umbrel launcher for Dashy.
+releaseNotes: Dashy 4.6.0 with reliability fixes, German translation updates, improved schema support, and OIDC quality-of-life improvements.
 developer: Steffen
 website: http://192.168.188.40:8088
 repo: http://192.168.188.40:8088

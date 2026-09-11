@@ -1,6 +1,6 @@
 FROM oven/bun:1.3.13-slim@sha256:7e8ed3961db1cdedf17d516dda87948cfedbd294f53bf16462e5b57ed3fff0f1
 
-ARG GBRAIN_COMMIT=67e7e8a9246b75b9aec359e17dc3e5746d62fc62
+ARG GBRAIN_COMMIT=a6be012a3bcfac42e279630aedec5cda4a450e29
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends git ca-certificates curl bash \
@@ -9,8 +9,8 @@ RUN apt-get update \
 RUN git clone https://github.com/garrytan/gbrain.git /opt/gbrain \
   && cd /opt/gbrain \
   && git checkout "$GBRAIN_COMMIT" \
-  && test "$(node -p "require('./package.json').version")" = "0.46.28.0" \
-  && bun install --frozen-lockfile \
+  && test "$(node -p "require('./package.json').version")" = "0.50.0.0" \
+  && bun install --frozen-lockfile --ignore-scripts \
   && bun link
 
 ENV HOME=/data \
