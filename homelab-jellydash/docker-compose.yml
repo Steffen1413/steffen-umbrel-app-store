@@ -10,7 +10,7 @@ services:
         condition: service_healthy
 
   jellydash:
-    image: ghcr.io/themartz90/jellydash:latest@sha256:e540a8502982eda9b8a0ddbc092727126aaf13cd696361c665b3e9ef8b6705e7
+    image: ghcr.io/themartz90/jellydash:latest@sha256:5368be83f4176a835e67d62650371a6ee12b4a7c3ca9617668e11b4b1603b376
     container_name: jellydash
     restart: unless-stopped
     env_file:
