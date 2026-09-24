@@ -95,7 +95,9 @@ run_new() {
 
 run_new apply-migrations --force-schema --yes
 run_new config set sync.repo_path /brainparent/brain
-if [[ ! -f "$BASE/data/.gbrain/schema-packs/homelab-gbrain-v2/pack.json" ]]; then
+# .gbrain is owned by the container's root user and is not traversable by
+# umbrel; test through sudo, just like the one-off CLI calls below.
+if ! sudo -n test -f "$BASE/data/.gbrain/schema-packs/homelab-gbrain-v2/pack.json"; then
   run_new schema fork gbrain-base-v2 homelab-gbrain-v2
   run_new schema add-link-type related_to --pack homelab-gbrain-v2
 fi
