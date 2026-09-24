@@ -6,9 +6,7 @@ CONTAINER="gbrain_web_1"
 LOG_DIR="$APP_DIR/logs"
 LOG="$LOG_DIR/monthly-audit.log"
 LOCK="/tmp/homelab-gbrain-maintenance.lock"
-QUERIES="$APP_DIR/scripts/gbrain-monthly-queries.jsonl"
 CANONICAL_AUDIT="$APP_DIR/scripts/gbrain-canonical-audit.py"
-CONTRADICTION_CHECK="$APP_DIR/scripts/gbrain-contradiction-result-check.py"
 
 mkdir -p "$LOG_DIR"
 
@@ -34,7 +32,6 @@ run_gbrain() {
     -v "$APP_DIR/data:/data" \
     -v "$APP_DIR/brain-parent:/brainparent" \
     -v "$APP_DIR/brain:/brainparent/brain:ro" \
-    -v "$QUERIES:/audit-queries.jsonl:ro" \
     "$IMAGE" \
     "$@"
 }
@@ -67,21 +64,10 @@ trap cleanup EXIT
   tail -n 8 "$LINT_RESULT"
   rm -f "$LINT_RESULT"
   run_gbrain check-backlinks check /brainparent/brain || echo "backlink check reported findings"
-  if sudo grep -Eq '^(OPENROUTER_API_KEY|ANTHROPIC_API_KEY|OPENAI_API_KEY|GEMINI_API_KEY)=' "$APP_DIR/secrets/gbrain.env"; then
-    CONTRADICTION_RESULT="$(mktemp)"
-    run_gbrain eval suspected-contradictions run \
-      --queries-file /audit-queries.jsonl \
-      --top-k 5 \
-      --limit 6 \
-      --budget-usd 0.20 \
-      --json \
-      --yes >"$CONTRADICTION_RESULT" || echo "contradiction probe command failed"
-    cat "$CONTRADICTION_RESULT"
-    python3 "$CONTRADICTION_CHECK" "$CONTRADICTION_RESULT" || echo "contradiction probe is not currently trustworthy"
-    rm -f "$CONTRADICTION_RESULT"
-  else
-    echo "CONTRADICTION_PROBE_SKIPPED: no LLM provider is configured in GBrain. Structural canonical/supersession checks still ran."
-  fi
+  # The optional LLM probe can keep the PGLite service stopped for minutes,
+  # and its current model has no pricing entry (the USD cost gate is disabled).
+  # Run it separately on a clone after a real spend limit and timeout exist.
+  echo "CONTRADICTION_PROBE_SKIPPED: separate bounded clone-based check required; structural checks completed."
   start_and_wait
   curl -fsS http://127.0.0.1:3131/health
   echo
