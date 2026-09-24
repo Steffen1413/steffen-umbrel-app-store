@@ -7,7 +7,6 @@ LOG_DIR="$APP_DIR/logs"
 LOG="$LOG_DIR/monthly-audit.log"
 LOCK="/tmp/homelab-gbrain-maintenance.lock"
 CANONICAL_AUDIT="$APP_DIR/scripts/gbrain-canonical-audit.py"
-CONTRADICTION_CHECK="$APP_DIR/scripts/gbrain-contradiction-result-check.py"
 QUERIES="$APP_DIR/scripts/gbrain-monthly-queries.jsonl"
 BACKUP_ROOT="/home/umbrel/umbrel/app-data-update-backups"
 SNAP=""
@@ -105,7 +104,11 @@ trap cleanup EXIT
       --queries-file /audit-queries.jsonl --top-k 3 --limit 6 \
       --budget-usd 0.20 --json --yes >"$SNAP/probe-result.json"; then
       jq '{run_status, queries_evaluated, judge_errors, verdict_breakdown, cost_usd, duration_ms}' "$SNAP/probe-result.json"
-      python3 "$CONTRADICTION_CHECK" "$SNAP/probe-result.json" || echo "contradiction probe result is not currently trustworthy"
+      if jq -e '.run_status == "ok" and .queries_evaluated == 6 and .judge_errors.total == 0' "$SNAP/probe-result.json" >/dev/null; then
+        jq -r '"CONTRADICTION_PROBE_VALID: true_contradictions=\(.verdict_breakdown.contradiction), judge_errors=\(.judge_errors.total)"' "$SNAP/probe-result.json"
+      else
+        echo "CONTRADICTION_PROBE_INVALID: incomplete or failed judge results."
+      fi
     else
       echo "CONTRADICTION_PROBE_INCOMPLETE: clone-only run failed or exceeded 180s; production remains available."
     fi
