@@ -57,7 +57,8 @@ trap cleanup EXIT
   echo "===== $(date -Is) gbrain maintenance start ====="
   sudo docker stop --time 30 "$CONTAINER" >/dev/null
   run_gbrain import /brain --no-embed
-  run_gbrain extract --stale --catch-up
+  # Legacy bulk extraction writes timeline rows outside the managed writer.
+  # Canonical page publication now handles new links and timeline entries.
   run_gbrain embed --stale
   run_gbrain stats
   start_and_wait
