@@ -52,7 +52,7 @@ sudo docker run --rm \
   -v "$BASE/brain:/brain" \
   --entrypoint bash \
   homelab-gbrain-web:latest \
-  -lc 'gbrain apply-migrations --yes && gbrain doctor --json && gbrain stats'
+  -lc 'gbrain apply-migrations --force-schema && gbrain apply-migrations --yes --no-autopilot-install && gbrain doctor --json && gbrain stats'
 
 umbreld client apps.start.mutate --appId "$APP_ID" >/dev/null
 for _ in $(seq 1 60); do
