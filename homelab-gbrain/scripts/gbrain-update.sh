@@ -101,6 +101,8 @@ if [[ ! -f "$BASE/data/.gbrain/schema-packs/homelab-gbrain-v2/pack.json" ]]; the
 fi
 run_new config set schema_pack homelab-gbrain-v2
 run_new schema validate homelab-gbrain-v2
+run_new extract --stale --catch-up
+run_new embed --stale
 run_new doctor --json
 run_new stats
 
