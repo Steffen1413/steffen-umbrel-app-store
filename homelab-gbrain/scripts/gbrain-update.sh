@@ -17,7 +17,7 @@ if [[ ! -f "$BASE/docker-compose.yml" || ! -d "$BASE/data" || ! -d "$BASE/brain"
 fi
 
 cd "$BASE"
-mkdir -p "$BACKUP"
+sudo mkdir -p "$BACKUP"
 
 OLD_IMAGE="$(sudo docker inspect -f '{{.Image}}' "$CONTAINER")"
 sudo docker image tag "$OLD_IMAGE" "codex-rollback/homelab-gbrain-web:$STAMP-before-update"
