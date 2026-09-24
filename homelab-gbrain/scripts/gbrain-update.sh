@@ -10,10 +10,8 @@ BACKUP="$BACKUP_ROOT/gbrain-$STAMP"
 export APP_DATA_DIR="$BASE"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE="$(cd -- "$SCRIPT_DIR/.." && pwd)"
-RESERVATION_NAME=".gbrain-owner-430ae444967bf0680407d82932f98d8c7e6368226d2783426c9412a3db086342.json"
-RESERVATION="$BASE/data/.gbrain/persistence/reservations/$RESERVATION_NAME"
 
-if [[ ! -f "$BASE/docker-compose.yml" || ! -d "$BASE/data" || ! -d "$BASE/brain" || ! -f "$SOURCE/Dockerfile" || ! -f "$SOURCE/umbrel-app.yml" ]] || ! sudo test -f "$RESERVATION"; then
+if [[ ! -f "$BASE/docker-compose.yml" || ! -d "$BASE/data" || ! -d "$BASE/brain" || ! -f "$SOURCE/Dockerfile" || ! -f "$SOURCE/umbrel-app.yml" ]]; then
   echo "refusing unexpected app layout at $BASE" >&2
   exit 1
 fi
@@ -54,10 +52,9 @@ sudo docker run --rm \
   -e GBRAIN_NO_ONBOARD_NUDGE=1 \
   -v "$BASE/data:/data" \
   -v "$BASE/brain:/brain" \
-  -v "$RESERVATION:/$RESERVATION_NAME:ro" \
   --entrypoint bash \
   homelab-gbrain-web:latest \
-  -lc 'gbrain apply-migrations --force-schema && gbrain apply-migrations --yes --no-autopilot-install && gbrain doctor --json && gbrain stats'
+  -lc 'gbrain apply-migrations --yes && gbrain doctor --json && gbrain stats'
 
 umbreld client apps.start.mutate --appId "$APP_ID" >/dev/null
 for _ in $(seq 1 60); do
