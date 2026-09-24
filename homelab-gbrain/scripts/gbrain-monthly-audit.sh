@@ -9,11 +9,8 @@ LOCK="/tmp/homelab-gbrain-maintenance.lock"
 QUERIES="$APP_DIR/scripts/gbrain-monthly-queries.jsonl"
 CANONICAL_AUDIT="$APP_DIR/scripts/gbrain-canonical-audit.py"
 CONTRADICTION_CHECK="$APP_DIR/scripts/gbrain-contradiction-result-check.py"
-RESERVATION_NAME=".gbrain-owner-430ae444967bf0680407d82932f98d8c7e6368226d2783426c9412a3db086342.json"
-RESERVATION="$APP_DIR/data/.gbrain/persistence/reservations/$RESERVATION_NAME"
 
 mkdir -p "$LOG_DIR"
-sudo test -f "$RESERVATION" || { echo "missing GBrain writer reservation: $RESERVATION" >&2; exit 1; }
 
 exec 9>"$LOCK"
 if ! flock -n 9; then
@@ -36,7 +33,6 @@ run_gbrain() {
     -e GBRAIN_NO_PROBE_PROMPT=1 \
     -v "$APP_DIR/data:/data" \
     -v "$APP_DIR/brain:/brain:ro" \
-    -v "$RESERVATION:/$RESERVATION_NAME:ro" \
     -v "$QUERIES:/audit-queries.jsonl:ro" \
     "$IMAGE" \
     "$@"
