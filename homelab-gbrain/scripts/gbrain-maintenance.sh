@@ -57,8 +57,15 @@ trap cleanup EXIT
   echo "===== $(date -Is) gbrain maintenance start ====="
   sudo docker stop --time 30 "$CONTAINER" >/dev/null
   run_gbrain import /brain --no-embed
-  # Legacy bulk extraction writes timeline rows outside the managed writer.
-  # Canonical page publication now handles new links and timeline entries.
+  # The current HTTP MCP does not reconcile remote Markdown links inline.
+  # Legacy extraction is required while the source uses the unmanaged writer.
+  writer_status="$(run_gbrain sources writer status --json)"
+  if printf '%s\n' "$writer_status" | grep -Eq '"enabled"[[:space:]]*:[[:space:]]*false'; then
+    run_gbrain extract --stale --catch-up
+  else
+    echo "ERROR: managed writer is active; link/timeline extraction needs a coordinated implementation" >&2
+    exit 1
+  fi
   run_gbrain embed --stale
   run_gbrain stats
   start_and_wait
