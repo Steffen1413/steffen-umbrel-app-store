@@ -53,7 +53,9 @@ trap cleanup EXIT
 {
   echo "===== $(date -Is) gbrain maintenance start ====="
   sudo docker stop --time 30 "$CONTAINER" >/dev/null
-  run_gbrain import /brainparent/brain --no-embed
+  # 0.54 protects the canonical checkout: direct import is refused once the
+  # writer has registered it. MCP/capture writes already update the database
+  # and Markdown together; reconcile exceptional file edits per page.
   run_gbrain extract --stale --catch-up
   run_gbrain embed --stale
   run_gbrain stats
