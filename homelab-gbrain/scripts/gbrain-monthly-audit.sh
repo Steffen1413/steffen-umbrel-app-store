@@ -32,7 +32,8 @@ run_gbrain() {
     -e GBRAIN_NO_ONBOARD_NUDGE=1 \
     -e GBRAIN_NO_PROBE_PROMPT=1 \
     -v "$APP_DIR/data:/data" \
-    -v "$APP_DIR/brain:/brain:ro" \
+    -v "$APP_DIR/brain-parent:/brainparent" \
+    -v "$APP_DIR/brain:/brainparent/brain:ro" \
     -v "$QUERIES:/audit-queries.jsonl:ro" \
     "$IMAGE" \
     "$@"
@@ -61,11 +62,11 @@ trap cleanup EXIT
   run_gbrain doctor --json --fast || echo "doctor returned non-zero"
   run_gbrain orphans --json || echo "orphans check returned non-zero"
   LINT_RESULT="$(mktemp)"
-  run_gbrain lint /brain >"$LINT_RESULT" 2>&1 || true
+  run_gbrain lint /brainparent/brain >"$LINT_RESULT" 2>&1 || true
   echo "Lint summary (legacy pages may lack created metadata):"
   tail -n 8 "$LINT_RESULT"
   rm -f "$LINT_RESULT"
-  run_gbrain check-backlinks check /brain || echo "backlink check reported findings"
+  run_gbrain check-backlinks check /brainparent/brain || echo "backlink check reported findings"
   if sudo grep -Eq '^(OPENROUTER_API_KEY|ANTHROPIC_API_KEY|OPENAI_API_KEY|GEMINI_API_KEY)=' "$APP_DIR/secrets/gbrain.env"; then
     CONTRADICTION_RESULT="$(mktemp)"
     run_gbrain eval suspected-contradictions run \
