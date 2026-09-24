@@ -28,6 +28,7 @@ fi
 
 run_gbrain() {
   sudo docker run --rm \
+    --entrypoint gbrain \
     --env-file "$APP_DIR/secrets/gbrain.env" \
     -e HOME=/data \
     -e GBRAIN_HOME=/data \
@@ -38,7 +39,7 @@ run_gbrain() {
     -v "$RESERVATION:/$RESERVATION_NAME:ro" \
     -v "$QUERIES:/audit-queries.jsonl:ro" \
     "$IMAGE" \
-    gbrain "$@"
+    "$@"
 }
 
 start_and_wait() {
