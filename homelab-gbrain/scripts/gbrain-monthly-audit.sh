@@ -13,7 +13,7 @@ RESERVATION_NAME=".gbrain-owner-430ae444967bf0680407d82932f98d8c7e6368226d278342
 RESERVATION="$APP_DIR/data/.gbrain/persistence/reservations/$RESERVATION_NAME"
 
 mkdir -p "$LOG_DIR"
-[[ -f "$RESERVATION" ]] || { echo "missing GBrain writer reservation: $RESERVATION" >&2; exit 1; }
+sudo test -f "$RESERVATION" || { echo "missing GBrain writer reservation: $RESERVATION" >&2; exit 1; }
 
 exec 9>"$LOCK"
 if ! flock -n 9; then

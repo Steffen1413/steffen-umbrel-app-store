@@ -13,7 +13,7 @@ SOURCE="$(cd -- "$SCRIPT_DIR/.." && pwd)"
 RESERVATION_NAME=".gbrain-owner-430ae444967bf0680407d82932f98d8c7e6368226d2783426c9412a3db086342.json"
 RESERVATION="$BASE/data/.gbrain/persistence/reservations/$RESERVATION_NAME"
 
-if [[ ! -f "$BASE/docker-compose.yml" || ! -d "$BASE/data" || ! -d "$BASE/brain" || ! -f "$RESERVATION" || ! -f "$SOURCE/Dockerfile" || ! -f "$SOURCE/umbrel-app.yml" ]]; then
+if [[ ! -f "$BASE/docker-compose.yml" || ! -d "$BASE/data" || ! -d "$BASE/brain" || ! -f "$SOURCE/Dockerfile" || ! -f "$SOURCE/umbrel-app.yml" ]] || ! sudo test -f "$RESERVATION"; then
   echo "refusing unexpected app layout at $BASE" >&2
   exit 1
 fi
