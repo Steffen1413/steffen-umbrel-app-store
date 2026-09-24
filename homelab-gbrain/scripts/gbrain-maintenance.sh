@@ -25,15 +25,16 @@ fi
 
 run_gbrain() {
   sudo docker run --rm \
+    --entrypoint gbrain \
     --env-file "$APP_DIR/secrets/gbrain.env" \
     -e HOME=/data \
     -e GBRAIN_HOME=/data \
     -e GBRAIN_NO_ONBOARD_NUDGE=1 \
     -v "$APP_DIR/data:/data" \
-    -v "$APP_DIR/brain:/brain:ro" \
+    -v "$APP_DIR/brain:/brain" \
     -v "$RESERVATION:/$RESERVATION_NAME:ro" \
     "$IMAGE" \
-    gbrain "$@"
+    "$@"
 }
 
 start_and_wait() {
@@ -55,7 +56,7 @@ trap cleanup EXIT
 {
   echo "===== $(date -Is) gbrain maintenance start ====="
   sudo docker stop --time 30 "$CONTAINER" >/dev/null
-  run_gbrain import /brain
+  run_gbrain import /brain --no-embed
   run_gbrain extract --stale --catch-up
   run_gbrain embed --stale
   run_gbrain stats
